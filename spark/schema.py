@@ -20,15 +20,15 @@ cond_cap_sec_bal = StructType([
 ])
 
 exec_comp_stat = StructType([
-    StructField("rcept_no", StringType, nullable = true),
-    StructField("corp_cls", StringType, nullable = true),
-    StructField("corp_code", StringType, nullable = true),
-    StructField("corp_name", StringType, nullable = true),
-    StructField("se", StringType, nullable = true),
-    StructField("nmpr", LongType, nullable = true),
-    StructField("fyer_salary_totamt", LongType, nullable = true),
-    StructField("jan_salary_am", LongType, nullable = true),
-    StructField("rm", StringType, nullable = true)
+    StructField("rcept_no", StringType(), True),
+    StructField("corp_cls", StringType(), True),
+    StructField("corp_code", StringType(), True),
+    StructField("corp_name", StringType(), True),
+    StructField("se", StringType(), True),
+    StructField("nmpr", StringType(), True),
+    StructField("fyer_salary_totamt", StringType(), True),
+    StructField("jan_salary_am", StringType(), True),
+    StructField("rm", StringType(), True)
   ])
 
 corp_bond_bal = StructType([
