@@ -271,7 +271,117 @@ minority_share = StructType([
     StructField("hold_stock_rate", StringType(), True),  # 보유 주식 비율
 ])
 
+#임원 현황
+exec_status = StructType([
+    StructField("rcept_no", StringType(), True),  # 접수번호(14자리)
+    StructField("corp_cls", StringType(), True),  # 법인구분: Y(유가), K(코스닥), N(코넥스), E(기타)
+    StructField("corp_code", StringType(), True),  # 고유번호(8자리)
+    StructField("corp_name", StringType(), True),  # 법인명
+    StructField("nm", StringType(), True),  # 성명
+    StructField("sexdstn", StringType(), True),  # 성별
+    StructField("birth_ym", StringType(), True),  # 출생 년월: YYYY년 MM월
+    StructField("ofcps", StringType(), True),  # 직위: 회장, 사장, 사외이사 등
+    StructField("rgist_exctv_at", StringType(), True),  # 등기 임원 여부: 등기임원, 미등기임원 등
+    StructField("fte_at", StringType(), True),  # 상근 여부: 상근, 비상근
+    StructField("chrg_job", StringType(), True),  # 담당 업무: 대표이사, 이사, 사외이사 등
+    StructField("main_career", StringType(), True),  # 주요 경력
+    StructField("mxmm_shrholdr_relate", StringType(), True),  # 최대 주주 관계
+    StructField("hffc_pd", StringType(), True),  # 재직 기간
+    StructField("tenure_end_on", StringType(), True)  # 임기 만료 일
+])
 
+#직원 현황
+emp_status = StructType([
+    StructField("rcept_no", StringType(), True),  # 접수번호(14자리)
+    StructField("corp_cls", StringType(), True),  # 법인구분: Y(유가), K(코스닥), N(코넥스), E(기타)
+    StructField("corp_code", StringType(), True),  # 고유번호(8자리)
+    StructField("corp_name", StringType(), True),  # 법인명
+    StructField("fo_bbm", StringType(), True),  # 사업부문
+    StructField("sexdstn", StringType(), True),  # 성별: 남, 여
+    StructField("reform_bfe_emp_co_rgllbr", StringType(), True),  # 개정 전 직원 수 정규직
+    StructField("reform_bfe_emp_co_cnttk", StringType(), True),  # 개정 전 직원 수 계약직
+    StructField("reform_bfe_emp_co_etc", StringType(), True),  # 개정 전 직원 수 기타
+    StructField("rgllbr_co", StringType(), True),  # 정규직 수
+    StructField("rgllbr_abacpt_labrr_co", StringType(), True),  # 정규직 단시간 근로자 수
+    StructField("cnttk_co", StringType(), True),  # 계약직 수
+    StructField("cnttk_abacpt_labrr_co", StringType(), True),  # 계약직 단시간 근로자 수
+    StructField("sm", StringType(), True),  # 합계
+    StructField("avrg_cnwk_sdytrn", StringType(), True),  # 평균 근속 연수
+    StructField("fyer_salary_totamt", StringType(), True),  # 연간 급여 총액
+    StructField("jan_salary_am", StringType(), True),  # 1인평균 급여 액
+    StructField("rm", StringType(), True)  # 비고
+])
+
+#이사·감사 개인별 보수 현황
+indv_dir_aud_comp = StructType([
+    StructField("rcept_no", StringType(), True),  # 접수번호(14자리)
+    StructField("corp_cls", StringType(), True),  # 법인구분: Y(유가), K(코스닥), N(코넥스), E(기타)
+    StructField("corp_code", StringType(), True),  # 고유번호(8자리)
+    StructField("corp_name", StringType(), True),  # 법인명
+    StructField("nm", StringType(), True),  # 이름
+    StructField("ofcps", StringType(), True),  # 직위
+    StructField("mendng_totamt", StringType(), True),  # 보수 총액
+    StructField("mendng_totamt_ct_incls_mendng", StringType(), True)  # 보수 총액 비 포함 보수
+])
+
+#이사·감사 전체의 보수현황
+all_dir_aud_comp = StructType([
+    StructField("rcept_no", StringType(), True),  # 접수번호(14자리)
+    StructField("corp_cls", StringType(), True),  # 법인구분: Y(유가), K(코스닥), N(코넥스), E(기타)
+    StructField("corp_code", StringType(), True),  # 고유번호(8자리)
+    StructField("corp_name", StringType(), True),  # 법인명
+    StructField("nmpr", StringType(), True),  # 인원수
+    StructField("mendng_totamt", StringType(), True),  # 보수 총액
+    StructField("jan_avrg_mendng_am", StringType(), True),  # 1인 평균 보수 액
+    StructField("rm", StringType(), True)  # 비고
+])
+
+#개인별 보수지급 금액(5억이상 상위5인)	
+top5_exec_comp = StructType([
+    StructField("rcept_no", StringType(), True),  # 접수번호(14자리)
+    StructField("corp_cls", StringType(), True),  # 법인구분: Y(유가), K(코스닥), N(코넥스), E(기타)
+    StructField("corp_code", StringType(), True),  # 고유번호(8자리)
+    StructField("corp_name", StringType(), True),  # 법인명
+    StructField("nm", StringType(), True),  # 이름
+    StructField("ofcps", StringType(), True),  # 직위
+    StructField("mendng_totamt", StringType(), True),  # 보수 총액
+    StructField("mendng_totamt_ct_incls_mendng", StringType(), True)  # 보수 총액 비 포함 보수
+])
+#타법인 출자현황
+other_corp_inv = StructType([
+    StructField("rcept_no", StringType(), True),  # 접수번호(14자리)
+    StructField("corp_cls", StringType(), True),  # 법인구분: Y(유가), K(코스닥), N(코넥스), E(기타)
+    StructField("corp_code", StringType(), True),  # 고유번호(8자리)
+    StructField("corp_name", StringType(), True),  # 회사명
+    StructField("inv_prm", StringType(), True),  # 법인명
+    StructField("frst_acqs_de", StringType(), True),  # 최초 취득 일자(YYYYMMDD)
+    StructField("invstmnt_purps", StringType(), True),  # 출자 목적
+    StructField("frst_acqs_amount", StringType(), True),  # 최초 취득 금액
+    StructField("bsis_blce_qy", StringType(), True),  # 기초 잔액 수량
+    StructField("bsis_blce_qota_rt", StringType(), True),  # 기초 잔액 지분 율
+    StructField("bsis_blce_acntbk_amount", StringType(), True),  # 기초 잔액 장부 가액
+    StructField("incrs_dcrs_acqs_dsps_qy", StringType(), True),  # 증가 감소 취득 처분 수량
+    StructField("incrs_dcrs_acqs_dsps_amount", StringType(), True),  # 증가 감소 취득 처분 금액
+    StructField("incrs_dcrs_evl_lstmn", StringType(), True),  # 증가 감소 평가 손액
+    StructField("trmend_blce_qy", StringType(), True),  # 기말 잔액 수량
+    StructField("trmend_blce_qota_rt", StringType(), True),  # 기말 잔액 지분 율
+    StructField("trmend_blce_acntbk_amount", StringType(), True),  # 기말 잔액 장부 가액
+    StructField("recent_bsns_year_fnnr_sttus_tot_assets", StringType(), True),  # 최근 사업 연도 재무 현황 총 자산
+    StructField("recent_bsns_year_fnnr_sttus_thstrm_ntpf", StringType(), True)  # 최근 사업 연도 재무 현황 당기 순이익
+])
+
+#단일회사 주요 재무제표
+single_corp_fin = StructType([
+    StructField("bsns_year", StringType(), True),  # 사업 연도
+    StructField("corp_code", StringType(), True),  # 고유번호(8자리)
+    StructField("stock_code", StringType(), True),  # 종목 코드(6자리)
+    StructField("reprt_code", StringType(), True),  # 보고서 코드
+    StructField("idx_cl_code", StringType(), True),  # 지표분류코드
+    StructField("idx_cl_nm", StringType(), True),  # 지표분류명
+    StructField("idx_code", StringType(), True),  # 지표코드
+    StructField("idx_nm", StringType(), True),  # 지표명
+    StructField("idx_val", StringType(), True)  # 지표값
+])
 
 schema_set = {
     'cond_cap_sec_bal': ArrayType(cond_cap_sec_bal), 
@@ -281,7 +391,7 @@ schema_set = {
     'com_paper_bal': ArrayType(com_paper_bal),
     'debt_sec_perf': ArrayType(debt_sec_perf), 
     #'priv_fund_use': ArrayType(priv_fund_use), 
- #'pub_fund_use': ArrayType(pub_fund_use), 
+     #'pub_fund_use': ArrayType(pub_fund_use), 
     'dir_aud_comp_gm': ArrayType(dir_aud_comp_gm), 
     'dir_aud_comp_type': ArrayType(dir_aud_comp_type), 
     'total_shares': ArrayType(total_shares), 
@@ -296,11 +406,11 @@ schema_set = {
     'major_shareholder': ArrayType(major_shareholder), 
     'major_share_chg': ArrayType(major_share_chg), 
     'minority_share': ArrayType(minority_share), 
- 'exec_status': ArrayType(exec_status), 
- 'emp_status': ArrayType(emp_status), 
- 'indv_dir_aud_comp': ArrayType(indv_dir_aud_comp), 
- 'all_dir_aud_comp': ArrayType(all_dir_aud_comp), 
- 'top5_exec_comp': ArrayType(top5_exec_comp), 
- 'other_corp_inv': ArrayType(other_corp_inv), 
- 'single_corp_fin': ArrayType(single_corp_fin)
- }
+    'exec_status': ArrayType(exec_status), 
+    'emp_status': ArrayType(emp_status), 
+    'indv_dir_aud_comp': ArrayType(indv_dir_aud_comp), 
+    'all_dir_aud_comp': ArrayType(all_dir_aud_comp), 
+    'top5_exec_comp': ArrayType(top5_exec_comp), 
+    'other_corp_inv': ArrayType(other_corp_inv), 
+    'single_corp_fin': ArrayType(single_corp_fin)
+    }
