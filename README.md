@@ -1,3 +1,6 @@
+[![English](https://img.shields.io/badge/README-English-blue?style=for-the-badge)](README.md)
+[![Korean](https://img.shields.io/badge/README-Korean-red?style=for-the-badge)](README.md)
+
 # Data Pipeline using DartAPI
 A data pipeline using DartAPI, Kafka Confluent Cloud, Spark on Dataproc, Bigquery
 
