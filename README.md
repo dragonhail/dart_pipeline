@@ -1,4 +1,4 @@
-[![English](https://img.shields.io/badge/README-English-blue?style=for-the-badge)](README.md)
+[![English](https://img.shields.io/badge/README-English-blue?style=for-the-badge)](README.md) (README.ko.md)
 [![Korean](https://img.shields.io/badge/README-Korean-red?style=for-the-badge)](README.md)
 
 # Data Pipeline using DartAPI
