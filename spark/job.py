@@ -39,4 +39,4 @@ topics = ['cond_cap_sec_bal', 'exec_comp_stat', 'corp_bond_bal', 'short_bond_bal
           'indv_dir_aud_comp', 'all_dir_aud_comp', 'top5_exec_comp', 'other_corp_inv', 'single_corp_fin'
           ]
 for topic in topics:
-    create_batch(spark, topic, schema_set[topic])
+    create_batch(spark, topic, schema_set[topic]).save()
