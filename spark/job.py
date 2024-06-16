@@ -1,5 +1,5 @@
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import from_json, col, explode, alias
+from pyspark.sql.functions import from_json, col, explode
 from schema import *
 
 spark = SparkSession.builder \
@@ -29,7 +29,7 @@ def create_batch(spark, topic, schema):
       .format("bigquery") \
       .option("temporaryGcsBucket", f"gs://dh_pipeline_2/checkpoints/{topic}") \
       .option("table", f"gleaming-plate-422507-e9.dataset_dart_samsung.{topic}") \
-      .mode("overwrite")
+      .mode("append")
     return write_stream
 topics = {}
 for topic in topics:
