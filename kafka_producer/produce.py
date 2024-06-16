@@ -27,22 +27,22 @@ producer = Producer(config)
 # API 호출 함수
 def call_api(url, params):
     response = requests.get(url, params=params)
+    result = response.json().get('list', [])
     if response.status_code == 200:
-        return response.json()
-    else:
-        return None
+        return result
 
 # Kafka로 데이터 전송
 def produce_to_kafka(topic, data):
     producer.produce(topic, value=json.dumps(data))
     producer.flush()
+    print("Finished Producing")
 
 # API 호출 및 데이터 Kafka로 전송
 def main():
     dart_api_key = 'e4b249b5d47019872ca796f46fa6370ff2384df3'
-    years = ['2019', '2020', '2021', '2022', '2023']  # 데이터 수집할 연도 리스트
+    years = ['2022', '2023']  # 데이터 수집할 연도 리스트
     corp_code = '00126380' # 삼성전자의 corp_code
-    reprt_code = '11011' # 11011: 1분기보고서, 11012: 반기보고서, 11013: 3분기보고서, 11014: 사업보고서
+    reprt_code = '11013' # 11011: 1분기보고서, 11012: 반기보고서, 11013: 3분기보고서, 11014: 사업보고서
     for year in years:
         for topic, url in annual_repo.items():
             params = {
@@ -53,11 +53,10 @@ def main():
                 }
 
             # OpenDART API 호출
-            data = call_api(url, params)["list"]
+            data = call_api(url, params)
             if data:
                 print(f"API 호출 성공: {topic} - {year} - {reprt_code}")
-                # Kafka로 데이터 전송
-                produce_to_kafka(topic, data)
+                produce_to_kafka(topic, data) # Kafka로 데이터 전송
             else:
                 print(f"API 호출 실패: {topic} - {year} - {reprt_code}")
 main()

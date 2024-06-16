@@ -12,7 +12,7 @@ def create_batch(spark, topic, schema):
       .option("kafka.bootstrap.servers", "pkc-gq2xn.asia-northeast3.gcp.confluent.cloud:9092") \
       .option("subscribe", topic) \
       .option("kafka.security.protocol", "SASL_SSL") \
-      .option("kafka.sasl.jaas.config", "org.apache.kafka.common.security.plain.PlainLoginModule required username='B7FLML5O2MTIRKRS' password='BkeDyywQbymIq1Klk72VvyGE82ZfsW3ZTjaN2PHF+Sv7+OLaVVGQWNiUDKSK390K';") \
+      .option("kafka.sasl.jaas.config", "org.apache.kafka.common.security.plain.PlainLoginModule required username='RLP6RKHULZ4DSMWI' password='9Pwrkxqd28qoHWgRjQuTIdLRMCI5+/eGxSgX780BVcPysNlJprfuW6it7H01dk1B';") \
       .option("kafka.sasl.mechanism", "PLAIN") \
       .option("startingOffsets", "earliest") \
       .option("failOnDataLoss", "true") \
@@ -25,13 +25,12 @@ def create_batch(spark, topic, schema):
     # Explode the array to get individual records
     exploded_df = parsed_df.select(explode(col("parsed_value")).alias("record")).select("record.*")
 
-    write_stream = exploded_df.writeStream \
-        .format("bigquery") \
-        .option("temporaryGcsBucket", f"gs://dh_pipeline_2/checkpoints/{topic}") \
-        .option("table", f"gleaming-plate-422507-e9.firstdataset.{topic}") \
-        .mode("overwrite")
+    write_stream =  exploded_df.write \
+      .format("bigquery") \
+      .option("temporaryGcsBucket", f"gs://dh_pipeline_2/checkpoints/{topic}") \
+      .option("table", f"gleaming-plate-422507-e9.dataset_dart_samsung.{topic}") \
+      .mode("overwrite")
     return write_stream
-
 topics = {}
 for topic in topics:
     create_batch(spark, topic, schema_set[topic])

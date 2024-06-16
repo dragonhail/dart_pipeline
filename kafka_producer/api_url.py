@@ -4,10 +4,10 @@ share = {
     "exec_maj_shareown": "https://opendart.fss.or.kr/api/elestock.json" #임원ㆍ주요주주 소유보
     }
 
-params_share = {
-    'crtfc_key': dart_api_key,
-    'corp_code': '00126380',  # 예: 삼성전자의 corp_code
-    }
+#params_share = {
+#    'crtfc_key': dart_api_key,
+#    'corp_code': '00126380',  # 예: 삼성전자의 corp_code
+#    }
 
 #정기보고서 주요정보
 annual_repo = {
