@@ -31,6 +31,12 @@ def create_batch(spark, topic, schema):
       .option("table", f"gleaming-plate-422507-e9.dataset_dart_samsung.{topic}") \
       .mode("append")
     return write_stream
-topics = {}
+topics = ['cond_cap_sec_bal', 'exec_comp_stat', 'corp_bond_bal', 'short_bond_bal', \
+          'com_paper_bal', 'debt_sec_perf', 'dir_aud_comp_gm', 'dir_aud_comp_type', \
+          'total_shares', 'non_audit_contr', 'out_dir_stat', 'new_cap_sec_bal', \
+          'cap_inc_dec_stat', 'dividend_info', 'treasury_stock', 'major_shareholder', \
+          'major_share_chg', 'minority_share', 'exec_status', 'emp_status', \
+          'indv_dir_aud_comp', 'all_dir_aud_comp', 'top5_exec_comp', 'other_corp_inv', 'single_corp_fin'
+          ]
 for topic in topics:
     create_batch(spark, topic, schema_set[topic])
