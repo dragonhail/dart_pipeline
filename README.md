@@ -29,5 +29,5 @@ npm install
 ```
 ## dbt <a id="dbt"></a>
 
-I used dbt to analyze data in bigquery warehouse.<br>
+This project use dbt to analyze data in bigquery warehouse.<br>
 Click this <a href="https://github.com/dragonhail/dart_dbt"> link </a>
