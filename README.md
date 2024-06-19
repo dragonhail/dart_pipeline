@@ -10,7 +10,8 @@ A data pipeline using DartAPI, Kafka Confluent Cloud, Spark on Dataproc, Bigquer
 - [dbt](#dbt)
   
 ## Description <a id="description"></a>
-This project use DartAPI to explore varioous asepects of companies listed on Korea Market. A kafka producer produce topics to kafka cluster using DartAPI. Received topics are consumed and batch processed by Dataproc Spark cluster, which will transform json shaped topics to structured dataframes. After the transformation, the dataframes will be loaded into bigquery warehouse and analyzed using dbt. The whole process will be orchestrated using Airflow Scheduler on GKE.
+This project use DartAPI to explore varioous asepects of companies listed on Korea Market. A kafka producer produce topics to kafka cluster using DartAPI. Received topics are consumed and batch processed by Dataproc Spark cluster, which will transform json shaped topics to structured dataframes. After the transformation, the dataframes will be loaded into bigquery warehouse and analyzed using dbt. The whole process will be orchestrated using Airflow Scheduler on GKE.<br>
+This project is still ongoing, and additional features not described below will be added soon.
 
 ## Prerequisites <a id="prerequisites"></a>
 - A GCP account
