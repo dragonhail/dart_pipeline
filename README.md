@@ -4,40 +4,24 @@
 A data pipeline using DartAPI, Kafka Confluent Cloud, Spark on Dataproc, Bigquery
 
 ## Table of Contents
+- [Description](#description)
 - [Prerequisites](#prerequisites)
-- [Kafka Confluent Cloud](#kafkaconfluent)
-- [Spark](#spark)
-- [Bigquery](#bigquery)
+- [Architecture](#architecture)
 - [dbt](#dbt)
+  
+## Description <a id="description"></a>
+This project use DartAPI to explore varioous asepects of companies listed on Korea Market. A kafka producer produce topics to kafka cluster using DartAPI. Received topics are consumed and batch processed by Dataproc Spark cluster, which will transform json shaped topics to structured dataframes. After the transformation, the dataframes will be loaded into bigquery warehouse and analyzed using dbt. The whole process will be orchestrated using Airflow Scheduler on GKE.
 
-## Prerequisites  <a id="prerequisites"></a>
-
+## Prerequisites <a id="prerequisites"></a>
 - A GCP account
 - A Kafka Confluent Cloud account
 - Dataproc Spark Cluster
 - Bigquery
 - dbt-core
+- Airflow on GKE cluster
+- Cloud Function
 
-## Kafka Confluent Cloud <a id="kafkaconfluent"></a>
+## Architecture <a id="architecture"></a>
 
-Create topic using confluent-cloud commands.
-```bash
-confluent kafka topic create <topic name> --cluster <cluster name>
-```
-
-## Spark <a id="spark"></a>
-- You need to add --packages option to register kafka connector.
-```bash
-spark-submit \
---packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.0 spark-processing.py 
-```
-
-## Bigquery <a id="bigquery"></a>
-```bash
-git clone https://github.com/your/repository.git
-cd repository
-npm install
-```
 ## dbt <a id="dbt"></a>
-
 This project use dbt to analyze data in bigquery warehouse. Click this [link](https://github.com/dragonhail/dart_dbt).
