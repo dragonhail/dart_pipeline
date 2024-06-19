@@ -23,6 +23,6 @@ This project is still ongoing, and additional features not described below will 
 - Cloud Function
 
 ## Architecture <a id="architecture"></a>
-
+![architecture-img](flowimg.png)
 ## dbt <a id="dbt"></a>
 This project use dbt to analyze data in bigquery warehouse. Click this [link](https://github.com/dragonhail/dart_dbt).
