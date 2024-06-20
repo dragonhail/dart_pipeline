@@ -1,15 +1,23 @@
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import from_json, col, explode, regexp_replace
+from dotenv import load_dotenv
+import os
 from schema import *
+
+load_dotenv()
 
 spark = SparkSession.builder \
     .appName("Dart to Kafka to Spark") \
     .getOrCreate()
 
+kafka_server = os.getenv('SERVER')
+kafka_username = os.getenv('KAFKA_USERNAME')
+kafka_password = os.getenv('KAFKA_PASSWORD')
+
 # Kafka Config
-kafka_bootstrap_servers = "pkc-gq2xn.asia-northeast3.gcp.confluent.cloud:9092"
+kafka_bootstrap_servers = kafka_server
 kafka_security_protocol = "SASL_SSL"
-kafka_sasl_jaas_config = "org.apache.kafka.common.security.plain.PlainLoginModule required username='RLP6RKHULZ4DSMWI' password='9Pwrkxqd28qoHWgRjQuTIdLRMCI5+/eGxSgX780BVcPysNlJprfuW6it7H01dk1B';"
+kafka_sasl_jaas_config = f"org.apache.kafka.common.security.plain.PlainLoginModule required username='{kafka_username}' password='{kafka_password}';"
 kafka_sasl_mechanism = "PLAIN"
 
 topics = [
