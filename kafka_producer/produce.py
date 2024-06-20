@@ -41,16 +41,30 @@ def produce_to_kafka(topic, data):
 def main():
     dart_api_key = 'e4b249b5d47019872ca796f46fa6370ff2384df3'
     years = ['2019', '2020', '2021', '2022', '2023']  # 데이터 수집할 연도 리스트
-    corp_list = ['00126380', ] # 삼성전자의 corp_code
+    corp_list = ['00126380', '00164742', '00164779'] # 삼성전자:00126380 SK: 현대차:00164742
     reprt_code = '11013' # 11011: 1분기보고서, 11012: 반기보고서, 11013: 3분기보고서, 11014: 사업보고서
     for corp_code in corp_list:
         for year in years:
             for topic, url in annual_repo.items():
-                params = {
-                'crtfc_key': dart_api_key,
-                'corp_code': corp_code,
-                'bsns_year': year,
-                'reprt_code': reprt_code
+                if topic=="single_corp_fin":
+                   params = {
+                    'crtfc_key': dart_api_key,
+                    'corp_code': corp_code,
+                    'bsns_year': year,
+                    'reprt_code': reprt_code,
+                    'idx_cl_code': 'M210000'
+                }
+                elif topic=="major_stock" or topic=="exec_maj_shareown":
+                   params = {
+                      'crtfc_key': dart_api_key,
+                      'corp_code': corp_code
+                      }
+                else: 
+                   params = {
+                    'crtfc_key': dart_api_key,
+                    'corp_code': corp_code,
+                    'bsns_year': year,
+                    'reprt_code': reprt_code
                 }
 
                 # OpenDART API 호출

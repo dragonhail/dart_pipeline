@@ -1,15 +1,6 @@
-#지분공시 종합정보
-share = {
-    "major_stock": "https://opendart.fss.or.kr/api/majorstock.json", #대량보유 상황보고
-    "exec_maj_shareown": "https://opendart.fss.or.kr/api/elestock.json" #임원ㆍ주요주주 소유보
-    }
-
-#params_share = {
-#    'crtfc_key': dart_api_key,
-#    'corp_code': '00126380',  # 예: 삼성전자의 corp_code
-#    }
-
 #정기보고서 주요정보
+#지분공시 종합정보
+#재무정보
 annual_repo = {
     "cond_cap_sec_bal": "https://opendart.fss.or.kr/api/cndlCaplScritsNrdmpBlce.json", # 조건부 자본증권 미상환 잔액
     "exec_comp_stat": "https://opendart.fss.or.kr/api/unrstExctvMendngSttus.json", # 미등기임원 보수현황
@@ -39,5 +30,7 @@ annual_repo = {
     "all_dir_aud_comp": "https://opendart.fss.or.kr/api/hmvAuditAllSttus.json", # 이사·감사 전체의 보수현황
     "top5_exec_comp": "https://opendart.fss.or.kr/api/indvdlByPay.json", # 개인별 보수지급 금액(5억이상 상위5인)
     "other_corp_inv": "https://opendart.fss.or.kr/api/otrCprInvstmntSttus.json", # 타법인 출자현황
+    "major_stock": "https://opendart.fss.or.kr/api/majorstock.json", #대량보유 상황보고
+    "exec_maj_shareown": "https://opendart.fss.or.kr/api/elestock.json", #임원ㆍ주요주주 소유보
     "single_corp_fin": "https://opendart.fss.or.kr/api/fnlttSinglIndx.json" #단일회사 주요 재무제표
     }
