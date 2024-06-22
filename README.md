@@ -25,4 +25,4 @@ This project is still ongoing, and additional features not described below will 
 ## Architecture <a id="architecture"></a>
 ![architecture-img](img.png)
 ## dbt <a id="dbt"></a>
-This project use dbt to analyze data in bigquery warehouse. Click this [link](https://github.com/dragonhail/dart_dbt).
+This project use dbt to analyze and create models for data in bigquery warehouse. For the repository refer to this [link](https://github.com/dragonhail/dart_dbt).
