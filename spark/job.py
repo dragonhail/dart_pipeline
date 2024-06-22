@@ -31,13 +31,23 @@ topics = [
 
 # 토픽별 필드 변환 정보 정의
 field_transformations = {
-    'all_dir_aud_comp': ['mendng_totamt' ,'jan_avrg_mendng_am'],
-    'major_shareholder': ['bsis_posesn_stock_co', 'trmend_posesn_stock_co'],
-    'minority_share': ['shrholdr_co', 'shrholdr_tot_co', 'shrholdr_rate', 'hold_stock_co', 'stock_tot_co'],
-    'comp_paper_bal': ['de10_below', 'de10_excess_de30_below', 'de30_excess_de90_below', 'de90_excess_de180_below', 'de180_excess_yy1_below', 'yy1_excess_yy2_below', 'yy2_excess_yy3_below', 'yy3_excess', 'sm'],
-    'corp_bond_bal': ['yy1_below', 'yy1_excess_yy2_below', 'yy2_excess_yy3_below', 'yy3_excess_yy4_below', 'yy4_excess_yy5_below', 'yy5_excess_yy10_below', 'yy10_excess', 'sm'],
-    'cap_inc_dec_stat': []
+    #'all_dir_aud_comp': ['mendng_totamt' ,'jan_avrg_mendng_am'],
+    #'major_shareholder': ['bsis_posesn_stock_co', 'trmend_posesn_stock_co'],
+    #'minority_share': ['shrholdr_co', 'shrholdr_tot_co', 'shrholdr_rate', 'hold_stock_co', 'stock_tot_co'],
+    #'comp_paper_bal': ['de10_below', 'de10_excess_de30_below', 'de30_excess_de90_below', 'de90_excess_de180_below', 'de180_excess_yy1_below', 'yy1_excess_yy2_below', 'yy2_excess_yy3_below', 'yy3_excess', 'sm'],
+    #'corp_bond_bal': ['yy1_below', 'yy1_excess_yy2_below', 'yy2_excess_yy3_below', 'yy3_excess_yy4_below', 'yy4_excess_yy5_below', 'yy5_excess_yy10_below', 'yy10_excess', 'sm'],
+    'total_shares': ["isu_stock_totqy", "now_to_isu_stock_totqy", "now_to_dcrs_stock_totqy", "redc", "profit_incnr", "rdmstk_repy", "etc", "istc_totqy", "tesstk_co", "distb_stock_co"], #주식의총수현황
+    'out_dir_stat': ['drctr_co', 'otcmp_drctr_co', 'apnt', 'rlsofc', 'mdstrm_resig'], #사외이사
+    'dividened_info': ['thstrm', 'frmtrm', 'lwfr'], #배당금정보
+    'major_shareholder': ['bsis_posesn_stock_co', 'bsis_posesn_stock_qota_rt', 'trmend_posesn_stock_co', 'trmend_posesn_stock_qota_rt'], #최대주주현황
+    'minority_share': ['shrholdr_co', 'shrholdr_tot_co', 'hold_stock_co', 'stock_tot_co'], #소액주주현황
+    'emp_status': ['cnttk_co', 'cnttk_abacpt_labrr_co', 'sm', 'avrg_cnwk_sdytrn', 'fyer_salary_totamt', 'jan_salary_am'], #직원현황
+    'top5_exec_comp': ['mendng_totamt', 'mendng_totamt_ct_incls_mendng'] #개인별 보수지급 금액(5억이상 상위5인) 
 }
+
+field_with_percetage = {
+    'minority_share': ['shrholdr_rate', 'hold_stock_rate']
+    }
 
 def create_batch(spark, topic, schema, transform_fields):
     df = spark.read \

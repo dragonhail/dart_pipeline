@@ -16,6 +16,10 @@ def read_config():
       if len(line) != 0 and line[0] != "#":
         parameter, value = line.strip().split('=', 1)
         config[parameter] = value.strip()
+    config['queue.buffering.max.messages'] = 100000  # 버퍼링할 최대 메시지 수
+    config['batch.num.messages'] = 1000  # 한 번에 전송할 메시지 수
+    config['linger.ms'] = 10  # 배치 전송을 지연시킬 최대 시간 (ms)
+
   return config
 
 # producer and consumer code here
@@ -34,14 +38,13 @@ def call_api(url, params):
 # Kafka로 데이터 전송
 def produce_to_kafka(topic, data):
     producer.produce(topic, value=json.dumps(data))
-    producer.flush()
     print("Finished Producing")
 
 # API 호출 및 데이터 Kafka로 전송
 def main():
     dart_api_key = 'e4b249b5d47019872ca796f46fa6370ff2384df3'
     years = ['2019', '2020', '2021', '2022', '2023']  # 데이터 수집할 연도 리스트
-    corp_list = ['00126380', '00164742', '00164779'] # 삼성전자:00126380 SK: 현대차:00164742
+    corp_list = ['00126380', '00164742', '00164779', '00401731'] # 삼성전자:00126380 SK: 현대차:00164742 LG:00401731
     reprt_code = '11013' # 11011: 1분기보고서, 11012: 반기보고서, 11013: 3분기보고서, 11014: 사업보고서
     for corp_code in corp_list:
         for year in years:
@@ -74,4 +77,8 @@ def main():
                     produce_to_kafka(topic, data) # Kafka로 데이터 전송
                 else:
                     print(f"API 호출 실패: {topic} - {year} - {reprt_code}")
+        producer.flush()
+        print("Finished flushing")
+    producer.close()
+
 main()
