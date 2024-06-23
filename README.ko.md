@@ -1,4 +1,4 @@
-[![한국어](https://img.shields.io/badge/README-%ED%95%9C%EA%B5%AD%EC%96%B4-blue?style=for-the-badge)](README.ko.md)
+[![English](https://img.shields.io/badge/README-English-blue?style=for-the-badge)](README.md)
 
 # DartAPI를 활용한 데이터 파이프라인
 DartAPI, Kafka Confluent Cloud, Dataproc Spark, BigQuery를 이용한 데이터 파이프라인 구축
