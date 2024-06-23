@@ -5,13 +5,13 @@ on:
     branches:
       - main
     paths:
-      - '/kafka_producer/**'  # 수정을 감지할 경로 설정
+      - './kafka_producer/**'  # 수정을 감지할 경로 설정
 
   pull_request:
     branches:
       - main 
     paths:
-      - '/kafka_producer/**'  # 수정을 감지할 경로 설정
+      - './kafka_producer/**'  # 수정을 감지할 경로 설정
 
 jobs:
   build-and-push:
@@ -37,5 +37,5 @@ jobs:
           file: ./kafka_producer/Dockerfile  # Dockerfile 경로 설정
           push: true
           tags: |
-            your-docker-hub-username/my-python-app:latest
-            your-docker-hub-username/my-python-app:${{ github.sha }}
+            dragonhailstone/kafka_producer_repo:latest
+            dragonhailstone/kafka_producer_repo:${{ github.sha }}
