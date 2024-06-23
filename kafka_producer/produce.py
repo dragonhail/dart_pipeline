@@ -77,8 +77,6 @@ def main():
                     produce_to_kafka(topic, data) # Kafka로 데이터 전송
                 else:
                     print(f"API 호출 실패: {topic} - {year} - {reprt_code}")
-        producer.flush()
-        print("Finished flushing")
-    producer.close()
-
+            producer.flush()
+            print("Finished flushing")
 main()
