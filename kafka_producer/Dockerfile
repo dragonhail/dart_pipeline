@@ -4,17 +4,14 @@ FROM python:3.12.4
 # 작업 디렉토리 설정
 WORKDIR /app
 
-RUN apt-get update && apt-get install -y \
-    gcc \
-    libfreetype6-dev \
-    libpng-dev \
-    libopenblas-dev \
-    && rm -rf /var/lib/apt/lists/*
+# Copy the requirements file into the container at /app
+COPY kafka_produce/requirements.txt ./
 
-COPY . .
-
-# Python 패키지 설치
+# Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the rest of the application code into the container
+COPY kafka_produce/ ./
 
 # 스크립트 실행
 CMD ["python", "produce.py"]
