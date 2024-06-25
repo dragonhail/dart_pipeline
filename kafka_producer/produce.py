@@ -5,6 +5,7 @@ from datetime import datetime
 from confluent_kafka.admin import AdminClient, NewTopic
 from confluent_kafka import Producer
 from api_url import *
+import asyncio
 
 def read_config():
   # reads the client configuration from client.properties
