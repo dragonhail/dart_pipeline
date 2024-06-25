@@ -5,13 +5,13 @@ FROM python:3.12.4
 WORKDIR /app
 
 # Copy the requirements file into the container at /app
-COPY kafka_produce/requirements.txt ./
+COPY kafka_producer/requirements.txt ./
 
 # Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the rest of the application code into the container
-COPY kafka_produce/ ./
+COPY kafka_producer/ ./
 
 # 스크립트 실행
 CMD ["python", "produce.py"]
