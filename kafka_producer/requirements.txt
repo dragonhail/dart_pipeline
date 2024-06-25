@@ -1,3 +1,2 @@
 requests
 confluent-kafka
-python-dotenv
