@@ -1,5 +1,5 @@
 # 기반이 될 이미지 선택 (예: Python 3.8)
-FROM python:3.12.4-alpine
+FROM python:3.12.4
 
 # 작업 디렉토리 설정
 WORKDIR /app
