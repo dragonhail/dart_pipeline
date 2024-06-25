@@ -34,3 +34,4 @@ annual_repo = {
     #"exec_maj_shareown": "https://opendart.fss.or.kr/api/elestock.json" #임원ㆍ주요주주 소유보
     #"single_corp_fin": "https://opendart.fss.or.kr/api/fnlttSinglIndx.json" #단일회사 주요 재무제표 /
     }
+#
