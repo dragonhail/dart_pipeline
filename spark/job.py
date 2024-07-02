@@ -58,6 +58,27 @@ def create_batch(spark, topic, schema, transform_fields):
       .option("startingOffsets", "earliest") \
       .option("failOnDataLoss", "true") \
       .load() #DF load
+    
+    # Assuming the JSON array is in the "value" column as a string
+    # Parse the JSON array using the defined schema
+    parsed_df = df.select(from_json(col("value").cast("string"), schema).alias("parsed_value"))
+
+    # Explode the array to get individual records
+    exploded_df = parsed_df.select(explode(col("parsed_value")).alias("record")).select("record.*")
+
+    # 특정 필드의 쉼표 제거 및 문자열을 정수로 변환
+    transformed_df = exploded_df
+    for field in transform_fields:
+        transformed_df = transformed_df.withColumn(field, regexp_replace(col(field), ",", "").cast("int"))
+
+    write_stream =  transformed_df.write \
+      .format("bigquery") \
+      .option("temporaryGcsBucket", f"gs://dh_pipeline_2/checkpoints/{topic}") \
+      .option("table", f"gleaming-plate-422507-e9.new.{topic}") \
+      .mode("append")
+
+    return write_stream
+
 
 for topic in topics:
     schema = schema_set[topic]

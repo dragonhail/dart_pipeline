@@ -33,9 +33,10 @@ jobs:
         id: docker_build
         uses: docker/build-push-action@v2
         with:
-          context: ./kafka_producer
+          context: ./kafka_producer # Dockerfile COPY 루트 경로 설정
           file: ./kafka_producer/Dockerfile  # Dockerfile 경로 설정
           push: true
           tags: |
             dragonhailstone/kafka_producer_repo:latest
             dragonhailstone/kafka_producer_repo:${{ github.sha }}
+            
