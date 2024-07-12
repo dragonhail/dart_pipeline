@@ -1,27 +1,18 @@
-[![Korean](https://img.shields.io/badge/README-Korean-blue?style=for-the-badge)](README.ko.md)
+# DartAPI를 활용한 데이터 파이프라인
+DartAPI, Kafka Confluent Cloud, Dataproc Spark, BigQuery를 이용한 데이터 파이프라인 구축
 
-# Data Pipeline using DartAPI
-A data pipeline using DartAPI, Kafka Confluent Cloud, Spark on Dataproc, Bigquery
+# 기능
+* Open DartAPI를 사용하여 한국 증시에 상장된 기업들의 정보를 불러와 정리. 
+* Kafka 프로듀서를 통해 DartAPI 데이터를 Kafka 클러스터 토픽에 전송
+* 토픽은 Dataproc Spark 클러스터에서 consume하고 배치 처리 후, JSON 형태의 비정형 데이터를 정형 데이터프레임으로 변환
+* 변환된 데이터프레임은 BigQuery 데이터 웨어하우스에 로드, dbt 적용
+* Airflow on GKE 사용
 
-## Table of Contents
-- [Description](#description)
-- [Prerequisites](#prerequisites)
-- [Architecture](#architecture)
-- [dbt](#dbt)
-  
-## Description <a id="description"></a>
-This project utilizes DartAPI to explore various aspects of companies listed on the Korea Market. A Kafka producer sends topics to a Kafka cluster using DartAPI. The received topics are consumed and batch processed by a Dataproc Spark cluster, which transforms JSON-shaped topics into structured dataframes. After transformation, the dataframes are loaded into BigQuery data warehouse and analyzed using dbt. The entire process is orchestrated using the Airflow Scheduler on GKE.
+## 아키텍처 <a id="아키텍처"></a>
+![아키텍처 이미지](img.png)
 
-## Prerequisites <a id="prerequisites"></a>
-- A GCP account
-- A Kafka Confluent Cloud account
-- Dataproc Spark Cluster
-- Bigquery
-- dbt-core
-- Airflow on GKE cluster
-- Cloud Function
-
-## Architecture <a id="architecture"></a>
-![architecture-img](img.png)
-## dbt <a id="dbt"></a>
-This project uses dbt to analyze and create models for data in bigquery warehouse. For the repository refer to this [link](https://github.com/dragonhail/dart_dbt).
+## 문제점
+* 카프카 필요성 의문
+  * api 별 kafka 토픽 생성 비효율성
+* api 자체의 데이터 결함
+* airflow on gke 작동 안함 issue
